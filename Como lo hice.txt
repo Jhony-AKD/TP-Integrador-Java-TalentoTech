@@ -1,0 +1,2611 @@
+Perfecto. Vamos a encararlo como si estuvieras trabajando en un proyecto real en Java usando Visual Studio Code
+, y yo voy a actuar como tu guía técnico.
+No te voy a resolver todo de golpe: iremos construyéndolo paso a paso para que entiendas cada parte.
+
+Paso 0 — Qué vas a construir
+
+Tu TP es básicamente un sistema de consola que:
+
+guarda productos,
+permite buscarlos,
+actualizarlos,
+eliminarlos,
+crear pedidos,
+validar stock,
+y mostrar pedidos realizados.
+
+Además, te están evaluando:
+
+POO,
+listas,
+excepciones,
+organización en paquetes,
+encapsulamiento,
+herencia/polimorfismo (podemos agregarlo más adelante),
+y buenas prácticas.
+ETAPA 1 — Crear el proyecto en VS Code
+Paso 1 — Crear la carpeta del proyecto
+
+Creá una carpeta con este nombre:
+
+techlab-gestion
+
+Abrila en VS Code.
+
+Paso 2 — Instalar extensiones necesarias
+
+En VS Code instalá:
+
+Extension Pack for Java
+Debugger for Java
+
+Las publica Microsoft
+.
+
+Paso 3 — Crear estructura de carpetas
+
+Dentro del proyecto creá:
+
+src
+
+Y dentro de src vamos a organizar paquetes.
+
+Creá estas carpetas:
+
+src/model
+src/service
+src/exception
+src/app
+
+Te explico para qué sirve cada una:
+
+Carpeta	Función
+model	Clases principales (Producto, Pedido, etc.)
+service	Lógica del sistema
+exception	Excepciones personalizadas
+app	Clase Main
+ETAPA 2 — Primera clase: Producto
+Paso 4 — Crear archivo Producto.java
+
+Dentro de:
+
+src/model
+
+creá:
+
+Producto.java
+
+Paso 5 — Declarar paquete y clase
+
+Ahora escribí SOLO esto:
+
+package model;
+
+public class Producto {
+
+}
+
+👉 Explicación:
+
+package model; indica que la clase pertenece al paquete model.
+public class Producto crea la plantilla de productos.
+ETAPA 3 — Atributos
+
+
+Paso 6 — Agregar atributos
+
+Ahora dentro de la clase agregá:
+
+id
+nombre
+precio
+stock
+
+Pensá qué tipo corresponde a cada uno según la consigna.
+
+Pista:
+
+IDs → enteros
+nombres → texto
+precios → decimales
+stock → enteros
+
+Debería quedarte algo conceptualmente así:
+
+private tipo atributo;
+
+QUEDÓ:
+public class Producto {
+ private int id;
+ private String nombre;
+ private double precio;
+ private int stock;
+
+⚠️ IMPORTANTE:
+Usá private porque te están evaluando encapsulamiento.
+
+ETAPA 4 — Constructor
+Paso 7 — Crear constructor
+
+Ahora necesitás un constructor que permita crear productos completos.
+
+Debe recibir:
+
+id
+nombre
+precio
+stock
+
+y asignarlos a los atributos usando:
+
+this.atributo = atributo;
+
+QUEDÓ:
+ public Producto(int id, String nombre, double precio, int stock) {
+     this.id = id;
+     this.nombre = nombre;
+     this.precio = precio;
+     this.stock = stock;
+ }
+
+ETAPA 5 — Getters y Setters
+Paso 8 — Generar getters y setters
+
+En VS Code podés hacerlo automáticamente:
+
+Cómo:
+Click derecho dentro de la clase
+"Source Action"
+"Generate Getters and Setters"
+
+Seleccioná todos.
+
+QUEDÓ:
+  public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+ETAPA 6 — toString()
+Paso 9 — Crear método toString
+
+Esto sirve para mostrar el producto fácilmente al imprimirlo.
+
+Generalo automáticamente:
+
+Click derecho
+Source Action
+Generate toString()
+
+Elegí todos los atributos.
+
+QUEDÓ:
+  @Override
+    public String toString() {
+        return "Producto [nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + ", getId()=" + getId() + "]";
+    }
+
+ETAPA 7 — Clase Main
+Paso 10 — Crear Main.java
+
+Dentro de:
+
+src/app
+
+creá:
+
+Main.java
+Paso 11 — Escribir método main
+
+Escribí:
+
+package app;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+    }
+
+}
+ETAPA 8 — Probar Producto
+Paso 12 — Crear un producto manualmente
+
+Dentro del main, intentá:
+
+importar Producto,
+crear un objeto Producto,
+imprimirlo con System.out.println().
+
+⚠️ Intentá hacerlo vos primero.
+
+Pistas:
+
+necesitás import model.Producto;
+crear objetos se hace con new
+el constructor recibe 4 valores.
+
+QUEDÓ:
+package app;
+
+import model.Producto;
+
+public class Main {
+    public static void main(String[] args) {
+        Producto producto1 = new Producto(1, "Laptop", 1500.0, 10);
+        Producto producto2 = new Producto(2, "Mouse", 25.0, 50);
+
+        System.out.println(producto1);
+        System.out.println(producto2);
+    }
+}
+
+Objetivo de esta primera etapa
+
+Cuando termines, el programa debería:
+
+✅ compilar
+✅ crear un producto
+✅ mostrarlo en consola
+
+NO avances todavía a pedidos
+
+Primero necesitamos tener bien:
+
+Producto
+listas
+menú
+servicios
+
+Después iremos a:
+
+ProductoService
+ArrayList
+menú interactivo
+búsqueda
+actualización
+eliminación
+pedidos
+excepciones personalizadas
+
+Cuando completes estos pasos, pegame:
+
+tu clase Producto
+y tu Main
+
+Y te guío con la siguiente etapa.
+
+Clase Producto:
+package model;
+
+public class Producto {
+
+ private int id;
+ private String nombre;
+ private double precio;
+ private int stock;
+
+ public Producto(int id, String nombre, double precio, int stock) {
+     this.id = id;
+     this.nombre = nombre;
+     this.precio = precio;
+     this.stock = stock;
+ }
+ 
+  public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+  @Override
+    public String toString() {
+        return "Producto [nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + ", getId()=" + getId() + "]";
+    }
+       
+}
+
+Main:
+package app;
+
+import model.Producto;
+
+public class Main {
+    public static void main(String[] args) {
+        Producto producto1 = new Producto(1, "Laptop", 1500.0, 10);
+        Producto producto2 = new Producto(2, "Mouse", 25.0, 50);
+
+        System.out.println(producto1);
+        System.out.println(producto2);
+    }
+}
+
+
+¡Muy bien! 👏
+La estructura está correcta y ya cumpliste varias cosas importantes del TP:
+
+✅ Paquetes
+✅ Clase Producto
+✅ Encapsulamiento (`private`)
+✅ Constructor
+✅ Getters/Setters
+✅ `toString()`
+✅ Creación de objetos
+✅ Uso de `System.out.println()`
+
+Y además tu código está prolijo 👍
+
+---
+
+# Pequeña mejora en `toString()`
+
+Ahora mismo aparece esto:
+
+```java
+getId()=
+```
+
+Eso pasa porque el generador automático usó el método getter.
+
+Queda más limpio así:
+
+```java
+@Override
+public String toString() {
+    return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + "]";
+}
+```
+
+No es obligatorio, pero queda más profesional.
+
+---
+
+# SIGUIENTE ETAPA → Manejar productos con ArrayList
+
+Ahora vamos a empezar la parte importante del sistema:
+guardar MUCHOS productos.
+
+---
+
+# ETAPA 9 — Crear ProductoService
+
+## Paso 13 — Crear archivo
+
+Dentro de:
+
+```txt id="4fxd8m"
+src/service
+```
+
+creá:
+
+```txt id="2s7jta"
+ProductoService.java
+```
+
+---
+
+# Paso 14 — Declarar paquete y clase
+
+Escribí:
+
+```java id="3l0d6e"
+package service;
+
+public class ProductoService {
+
+}
+```
+
+---
+
+# Paso 15 — Crear la lista de productos
+
+Ahora necesitás una colección para almacenar productos.
+
+👉 Vas a usar:
+
+```java id="x8mn62"
+ArrayList<Producto>
+```
+
+Antes de escribirlo:
+
+* importá `ArrayList`
+* importá `Producto`
+
+---
+
+## Pista importante
+
+La lista debe ser atributo de la clase.
+
+Conceptualmente:
+
+```java id="8zwc1d"
+private ArrayList<Producto> productos;
+```
+
+QUEDÓ:
+import model.Producto;
+
+import java.util.ArrayList;
+
+public class ProductoService {
+    private ArrayList<Producto> productos;
+
+}
+
+---
+
+# Paso 16 — Inicializar la lista
+
+Ahora creá un constructor en `ProductoService`.
+
+Dentro del constructor:
+
+* inicializá la lista usando `new ArrayList<>()`
+
+Conceptualmente:
+
+```java id="2e1d4y"
+productos = new ArrayList<>();
+```
+
+⚠️ Si no hacés esto después explota con `NullPointerException`.
+
+QUEDÓ:
+public class ProductoService {
+    private ArrayList<Producto> productos = new ArrayList<>();
+
+---
+
+# Paso 17 — Crear método agregarProducto
+
+Ahora creá un método que:
+
+* reciba un Producto,
+* y lo agregue a la lista.
+
+Nombre sugerido:
+
+```java id="x1g21n"
+agregarProducto
+```
+
+Dentro del método necesitás usar:
+
+```java id="ryph33"
+productos.add(...)
+```
+
+QUEDÓ:
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+
+---
+
+# Paso 18 — Crear método listarProductos
+
+Ahora hacé un método que recorra la lista y muestre todos los productos.
+
+Necesitarás:
+
+* un `for`
+* o un `for-each`
+
+Pista:
+
+```java id="74ykq8"
+for (Producto p : productos)
+```
+
+Y dentro:
+
+```java id="34tr7m"
+System.out.println(p);
+```
+
+QUEDÓ:
+    public void listarProductos() {
+        for (Producto producto : productos) {
+            System.out.println(producto);
+        }
+    }
+
+---
+
+# ETAPA 10 — Probar el servicio en Main
+
+## Paso 19 — Crear objeto ProductoService
+
+En `Main`, antes de crear productos:
+
+* importá `ProductoService`
+* creá una instancia
+
+QUEDÓ:
+import service.ProductoService;
+
+public class Main {
+    public static void main(String[] args) {
+	ProductoService servicio = new ProductoService();
+
+---
+
+## Paso 20 — Agregar productos a la lista
+
+En vez de imprimir directamente:
+
+Usá:
+
+```java id="mtm4pj"
+servicio.agregarProducto(...)
+```
+
+QUEDÓ:
+public class Main {
+    public static void main(String[] args) {
+        ProductoService servicio = new ProductoService();
+        servicio.agregarProducto(producto1);
+        servicio.agregarProducto(producto2);
+---
+
+## Paso 21 — Mostrar lista
+
+Ahora llamá:
+
+```java id="l7wn9s"
+servicio.listarProductos();
+```
+
+QUEDÓ:
+public class Main {
+    public static void main(String[] args) {
+        ProductoService servicio = new ProductoService();
+        servicio.agregarProducto(producto1);
+        servicio.agregarProducto(producto2);
+        servicio.listarProductos();
+---
+
+# Objetivo de esta etapa
+
+Cuando termines:
+✅ los productos estarán guardados en una lista
+✅ el sistema podrá listarlos
+✅ ya tendrás separación entre lógica y modelo
+✅ estarás usando POO correctamente
+
+---
+
+# IMPORTANTE
+
+Todavía NO hagas:
+
+* menú
+* Scanner
+* pedidos
+* excepciones
+
+Primero consolidemos:
+
+* listas
+* servicios
+* métodos
+
+---
+
+Cuando termines esta parte, pegá:
+
+* `ProductoService`
+* y el nuevo `Main`
+
+Y seguimos con:
+🔹 búsqueda por ID
+🔹 actualización
+🔹 eliminación
+🔹 Scanner y menú interactivo.
+
+ProductoService:
+package service;
+
+import model.Producto;
+
+import java.util.ArrayList;
+
+public class ProductoService {
+    private ArrayList<Producto> productos = new ArrayList<>();
+
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+
+    public void listarProductos() {
+        for (Producto producto : productos) {
+            System.out.println(producto);
+        }
+    }
+}
+
+Nuevo Main:
+package app;
+
+import model.Producto;
+import service.ProductoService;
+
+public class Main {
+    public static void main(String[] args) {
+        ProductoService servicio = new ProductoService();
+        servicio.agregarProducto(producto1);
+        servicio.agregarProducto(producto2);
+        servicio.listarProductos();
+        ProductoService agregarProducto = new ProductoService();
+        
+        
+        Producto producto1 = new Producto(1, "Laptop", 1500.0, 10);
+        Producto producto2 = new Producto(2, "Mouse", 25.0, 50);
+
+        System.out.println(producto1);
+        System.out.println(producto2);
+
+        
+    }
+}
+
+
+¡Muy bien! 🙌
+`ProductoService` te quedó correcto. Ya estás usando `ArrayList` y métodos, que era una parte importante del TP.
+
+Ahora, en el `Main`, tenés un pequeño problema de orden.
+
+---
+
+# El error principal
+
+Estás usando:
+
+```java id="53t5kr"
+servicio.agregarProducto(producto1);
+```
+
+ANTES de crear `producto1`.
+
+En Java, primero debés crear la variable y después usarla.
+
+---
+
+# También hay una línea innecesaria
+
+Esto:
+
+```java id="s5on3e"
+ProductoService agregarProducto = new ProductoService();
+```
+
+no hace falta.
+
+Ya tenés:
+
+```java id="8h4z3y"
+ProductoService servicio = new ProductoService();
+```
+
+Con uno alcanza.
+
+---
+
+# Cómo debería estar organizado
+
+El orden correcto es:
+
+1️⃣ crear el servicio
+2️⃣ crear productos
+3️⃣ agregarlos a la lista
+4️⃣ listarlos
+
+---
+
+# Intentá reorganizar tu `main`
+
+Debe quedar conceptualmente así:
+
+```txt id="ypp88u"
+crear servicio
+
+crear producto1
+crear producto2
+
+agregar productos al servicio
+
+listar productos
+```
+
+---
+
+# Otra mejora
+
+Ahora mismo seguís teniendo:
+
+```java id="2d8oeh"
+System.out.println(producto1);
+System.out.println(producto2);
+```
+
+Eso ya no hace falta porque:
+
+```java id="dbj7f0"
+servicio.listarProductos();
+```
+
+ya los muestra.
+
+---
+
+# Tu desafío ahora
+
+Corregí el `Main`:
+
+* moviendo la creación de productos arriba,
+* eliminando la línea innecesaria,
+* y quitando los `println`.
+
+Cuando lo hagas, el programa debería:
+
+✅ guardar productos en la lista
+✅ listarlos desde el servicio
+✅ verse mucho más profesional
+
+Después seguimos con:
+🔹 búsqueda por ID
+🔹 actualización
+🔹 eliminación
+🔹 menú con Scanner 😎
+
+
+Te paso como quedo ahora el nuevo Main:
+package app;
+
+import model.Producto;
+import service.ProductoService;
+
+public class Main {
+    public static void main(String[] args) {
+        ProductoService servicio = new ProductoService();
+              
+        Producto producto1 = new Producto(1, "Laptop", 1500.0, 10);
+        Producto producto2 = new Producto(2, "Mouse", 25.0, 50);
+
+        servicio.agregarProducto(producto1);
+        servicio.agregarProducto(producto2);
+        servicio.listarProductos();
+        
+    }
+}
+
+
+¡Ahora sí! 🔥
+Te quedó muy bien organizado.
+
+Ya tenés una base sólida:
+
+✅ separación en paquetes
+✅ clase modelo (`Producto`)
+✅ clase servicio (`ProductoService`)
+✅ uso de `ArrayList`
+✅ métodos
+✅ objetos
+✅ encapsulamiento
+✅ listado dinámico
+
+Eso ya parece un mini sistema real 😊
+
+---
+
+# SIGUIENTE ETAPA → Buscar productos
+
+Ahora vamos a implementar:
+
+```txt id="7aen2h"
+Buscar producto por ID
+```
+
+Esto después te servirá para:
+
+* actualizar,
+* eliminar,
+* crear pedidos,
+* validar stock.
+
+---
+
+# ETAPA 11 — Método buscarProductoPorId
+
+## Paso 22 — Ir a ProductoService
+
+Dentro de `ProductoService`, abajo de `listarProductos()`, creá un nuevo método.
+
+Nombre sugerido:
+
+```java id="j2jwnk"
+buscarProductoPorId
+```
+
+---
+
+# Paso 23 — Qué debe recibir
+
+El método debe recibir:
+
+```txt id="4wyymh"
+un int id
+```
+
+porque vamos a buscar usando el ID del producto.
+
+---
+
+# Paso 24 — Qué debe devolver
+
+Debe devolver:
+
+```txt id="jlwmzk"
+Producto
+```
+
+Porque:
+
+* si encuentra el producto → devuelve el objeto
+* si no lo encuentra → devuelve `null`
+
+---
+
+# Paso 25 — Recorrer la lista
+
+Dentro del método:
+
+* recorré `productos`
+* compará IDs
+
+Necesitarás:
+
+* un `for-each`
+* un `if`
+
+La comparación conceptual es:
+
+```java id="df9xvq"
+if (producto.getId() == id)
+```
+
+---
+
+# Paso 26 — Retornar el producto
+
+Si coincide:
+
+```java id="0fw7sl"
+return producto;
+```
+
+---
+
+# Paso 27 — Si no encuentra nada
+
+Al final del método:
+
+```java id="m8n3uy"
+return null;
+```
+
+Eso indica:
+👉 “no existe”.
+
+QUEDÓ:
+    public Producto buscarProductoPorId(int id) {
+        for (Producto producto : productos) {
+            if (producto.getId() == id) {
+                return producto;
+            }
+        }
+        return null; // o lanzar una excepción si no se encuentra
+    }
+
+---
+
+# ETAPA 12 — Probar búsqueda en Main
+
+## Paso 28 — Buscar un producto
+
+En `Main`, después de listar productos:
+
+creá una variable para guardar el resultado de la búsqueda.
+
+Conceptualmente:
+
+```java id="k1n3ku"
+Producto encontrado = ...
+```
+
+Usando:
+
+```java id="y2b7c5"
+servicio.buscarProductoPorId(...)
+```
+
+Probá buscar:
+
+```txt id="7yd15x"
+1
+```
+
+---
+
+# Paso 29 — Mostrar resultado
+
+Ahora necesitás validar si existe.
+
+Usá:
+
+```java id="3glb6m"
+if (encontrado != null)
+```
+
+Si existe:
+
+* mostrar producto
+
+Si no:
+
+* mostrar mensaje tipo:
+
+```txt id="yplr9g"
+Producto no encontrado
+```
+
+QUEDÓ:
+	...
+        servicio.listarProductos();
+
+        Producto productoEncontrado = servicio.buscarProductoPorId(1);
+        if (productoEncontrado != null) {
+            System.out.println("Producto encontrado: " + productoEncontrado);
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+---
+
+# Lo importante que estás aprendiendo acá
+
+Este paso enseña:
+
+* retorno de objetos
+* búsquedas en listas
+* comparación
+* null
+* validaciones
+* lógica real de backend
+
+Y esto ya empieza a parecerse MUCHO a sistemas empresariales en Java 😄
+
+Cuando termines:
+pegame:
+
+* el nuevo método
+* y cómo quedó el Main.
+
+
+Nuevo metodo:
+    public Producto buscarProductoPorId(int id) {
+        for (Producto producto : productos) {
+            if (producto.getId() == id) {
+                return producto;
+            }
+        }
+        return null; // o lanzar una excepción si no se encuentra
+    }
+
+Main:
+package app;
+
+import model.Producto;
+import service.ProductoService;
+
+public class Main {
+    public static void main(String[] args) {
+        ProductoService servicio = new ProductoService();
+              
+        Producto producto1 = new Producto(1, "Laptop", 1500.0, 10);
+        Producto producto2 = new Producto(2, "Mouse", 25.0, 50);
+
+        servicio.agregarProducto(producto1);
+        servicio.agregarProducto(producto2);
+        servicio.listarProductos();
+
+        Producto productoEncontrado = servicio.buscarProductoPorId(1);
+        if (productoEncontrado != null) {
+            System.out.println("Producto encontrado: " + productoEncontrado);
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+    }
+}
+
+
+Excelente 👏
+Esto ya está MUY bien armado.
+
+Tu método de búsqueda quedó correcto:
+
+* recorre la lista,
+* compara IDs,
+* devuelve el objeto,
+* usa `null` correctamente.
+
+Y en el `Main`:
+✅ guardás el resultado
+✅ validás con `!= null`
+✅ mostrás mensajes claros
+
+Eso es exactamente la lógica que se usa en muchísimos sistemas Java.
+
+---
+
+# SIGUIENTE ETAPA → Actualizar producto
+
+Ahora vamos a implementar una de las consignas obligatorias:
+
+```txt id="t8k0vq"
+Actualizar precio o stock
+```
+
+Y además vamos a agregar validaciones.
+
+---
+
+# ETAPA 13 — Método actualizarStock
+
+## Paso 30 — Crear método nuevo
+
+Dentro de `ProductoService`, creá:
+
+```java id="80m9bq"
+actualizarStock
+```
+
+---
+
+# Paso 31 — Parámetros
+
+Debe recibir:
+
+* el ID del producto
+* el nuevo stock
+
+Conceptualmente:
+
+```txt id="pyj8oo"
+(int id, int nuevoStock)
+```
+
+---
+
+# Paso 32 — Buscar producto
+
+Dentro del método:
+
+* reutilizá `buscarProductoPorId(id)`
+
+⚠️ Esto es importante:
+estás empezando a reutilizar métodos.
+Eso es buena práctica real de programación.
+
+---
+
+# Paso 33 — Validar existencia
+
+Necesitás:
+
+```java id="dljlwm"
+if (producto != null)
+```
+
+---
+
+# Paso 34 — Validar stock
+
+La consigna pide:
+
+```txt id="7c4qkq"
+que el stock no sea negativo
+```
+
+Entonces necesitás otro `if`.
+
+Conceptualmente:
+
+```java id="bm1qrr"
+if (nuevoStock >= 0)
+```
+
+---
+
+# Paso 35 — Actualizar usando setter
+
+Si todo está bien:
+
+```java id="5tzpt8"
+producto.setStock(nuevoStock);
+```
+
+---
+
+# Paso 36 — Mensajes
+
+Mostrá mensajes:
+
+* éxito
+* producto inexistente
+* stock inválido
+
+QUEDÓ:
+    public void actualizarStock(int id, int nuevoStock) {
+        Producto producto = buscarProductoPorId(id);
+        if (producto != null) {
+            if (nuevoStock >= 0) {
+                producto.setStock(nuevoStock);
+                System.out.println("Stock actualizado: " + producto);
+            } else {
+                System.out.println("El stock no puede ser negativo.");
+            }
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+    }
+
+---
+
+# ETAPA 14 — Probar en Main
+
+## Paso 37 — Probar actualización
+
+Después de la búsqueda:
+
+Probá algo así:
+
+* actualizar stock del producto 1
+* ponerle otro valor
+
+Y después:
+
+```java id="cjlwmx"
+servicio.listarProductos();
+```
+
+para verificar el cambio.
+
+---
+
+# DESAFÍO EXTRA (recomendado)
+
+Después intentá:
+
+```txt id="jlwm6s"
+stock = -5
+```
+
+y verificá que el sistema lo rechace.
+
+Eso demuestra:
+✅ validaciones
+✅ operadores relacionales
+✅ lógica de negocio
+
+QUEDÓ:
+	    ...
+            System.out.println("Producto no encontrado");
+        }
+
+        servicio.actualizarStock(1, 8); // Actualiza el stock del producto con id 1 a 8
+        servicio.actualizarStock(2, -5); // Intenta actualizar el stock del producto con id 2 a un valor negativo
+        servicio.actualizarStock(3, 5); // Intenta actualizar el stock de un producto que no existe (id 3)
+        servicio.listarProductos();
+
+---
+
+# Algo importante
+
+Fijate cómo empieza a crecer el sistema:
+
+```txt id="aotn9r"
+Producto → datos
+ProductoService → lógica
+Main → interacción
+```
+
+Esa separación te puede dar MUCHOS puntos en el TP 😄
+
+Cuando termines:
+pegame:
+
+* el método `actualizarStock`
+* y las pruebas que hiciste en `Main`.
+
+Después seguimos con:
+🔥 eliminar productos
+🔥 Scanner
+🔥 menú interactivo
+🔥 pedidos reales.
+
+
+Metodo actualizarStock:
+    public void actualizarStock(int id, int nuevoStock) {
+        Producto producto = buscarProductoPorId(id);
+        if (producto != null) {
+            if (nuevoStock >= 0) {
+                producto.setStock(nuevoStock);
+                System.out.println("Stock actualizado: " + producto);
+            } else {
+                System.out.println("El stock no puede ser negativo.");
+            }
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+    }
+
+Pruebas realizadas en Main:
+        servicio.actualizarStock(1, 8); // Actualiza el stock del producto con id 1 a 8
+        servicio.actualizarStock(2, -5); // Intenta actualizar el stock del producto con id 2 a un valor negativo
+        servicio.actualizarStock(3, 5); // Intenta actualizar el stock de un producto que no existe (id 3)
+        servicio.listarProductos();
+    }
+
+
+¡Excelente trabajo! 🔥
+Ahora sí ya tenés lógica bastante completa de gestión de productos.
+
+Tu método `actualizarStock()` está bien planteado:
+
+✅ reutiliza `buscarProductoPorId()`
+✅ valida existencia
+✅ valida stock negativo
+✅ usa setters correctamente
+✅ muestra mensajes claros
+
+Y las pruebas del `Main` están MUY bien pensadas porque cubren:
+
+| Caso                 | Resultado esperado |
+| -------------------- | ------------------ |
+| producto válido      | actualiza          |
+| stock negativo       | rechaza            |
+| producto inexistente | error              |
+
+Eso demuestra criterio, no solo código 👏
+
+---
+
+# SIGUIENTE ETAPA → Eliminar productos
+
+Ahora vamos a implementar otra consigna obligatoria:
+
+```txt id="s3m3s7"
+Eliminar producto
+```
+
+---
+
+# ETAPA 15 — Método eliminarProducto
+
+## Paso 38 — Crear método nuevo
+
+Dentro de `ProductoService` creá:
+
+```java id="jlwm8r"
+eliminarProducto
+```
+
+---
+
+# Paso 39 — Parámetro
+
+Debe recibir:
+
+```txt id="y1xtup"
+int id
+```
+
+porque vamos a eliminar por ID.
+
+---
+
+# Paso 40 — Buscar producto
+
+Reutilizá:
+
+```java id="y0m50z"
+buscarProductoPorId(id)
+```
+
+Guardalo en una variable.
+
+---
+
+# Paso 41 — Validar existencia
+
+Usá:
+
+```java id="4y1o0g"
+if (producto != null)
+```
+
+---
+
+# Paso 42 — Eliminar de la lista
+
+Acá aparece algo nuevo.
+
+Necesitás usar:
+
+```java id="7m1e0z"
+productos.remove(producto);
+```
+
+👉 Eso elimina el objeto del `ArrayList`.
+
+---
+
+# Paso 43 — Mostrar mensajes
+
+Mostrá:
+
+* producto eliminado
+* producto inexistente
+
+QUEDÓ:
+	...
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+    }
+
+    public void eliminarProducto(int id) {
+        Producto producto = buscarProductoPorId(id);
+        if (producto != null) {
+            productos.remove(producto);
+            System.out.println("Producto eliminado: " + producto);
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+    }
+
+---
+
+# ETAPA 16 — Probar en Main
+
+## Paso 44 — Eliminar producto existente
+
+Probá eliminar:
+
+```txt id="wy9tb5"
+id 2
+```
+
+---
+
+## Paso 45 — Mostrar lista otra vez
+
+Usá:
+
+```java id="yw3q6n"
+servicio.listarProductos();
+```
+
+para verificar que desapareció.
+
+---
+
+## Paso 46 — Caso inválido
+
+Probá eliminar:
+
+```txt id="dmp0fw"
+id 99
+```
+
+y verificá el mensaje.
+
+QUEDÓ:
+	...
+        servicio.listarProductos();
+        
+        servicio.eliminarProducto(2); // Elimina el producto con id 2
+        servicio.listarProductos();
+        servicio.eliminarProducto(99); // Intenta eliminar un producto que no existe (id 99)
+        servicio.listarProductos();
+
+---
+
+# Algo importante que ya estás haciendo bien
+
+Fijate cómo tu `ProductoService` ya parece un CRUD:
+
+| Acción | Método           |
+| ------ | ---------------- |
+| Create | agregarProducto  |
+| Read   | listar / buscar  |
+| Update | actualizarStock  |
+| Delete | eliminarProducto |
+
+Y CRUD es literalmente la base de muchísimos sistemas empresariales 😄
+
+---
+
+# Próxima etapa (MUY importante)
+
+Después de esto vamos a pasar a:
+
+🔥 `Scanner`
+🔥 menú interactivo
+🔥 `while` + `switch`
+🔥 try/catch
+🔥 validación de entradas
+
+Ahí el TP empieza a verse “completo”.
+
+Cuando termines:
+pegame:
+
+* `eliminarProducto`
+* y las pruebas del `Main`.
+
+
+Te paso eliminarProducto:
+    public void eliminarProducto(int id) {
+        Producto producto = buscarProductoPorId(id);
+        if (producto != null) {
+            productos.remove(producto);
+            System.out.println("Producto eliminado: " + producto);
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+    }
+
+Las pruebas del main:
+        servicio.eliminarProducto(2); // Elimina el producto con id 2
+        servicio.listarProductos();
+        servicio.eliminarProducto(99); // Intenta eliminar un producto que no existe (id 99)
+        servicio.listarProductos();
+
+Perfecto 👏
+Te quedó muy bien.
+
+Tu método:
+
+* reutiliza lógica,
+* elimina correctamente del `ArrayList`,
+* valida existencia,
+* y mantiene buena estructura.
+
+Ya tenés implementado un CRUD completo de productos 🔥
+
+---
+
+# Lo que YA cumpliste del TP
+
+✅ Variables y tipos de datos
+✅ Operadores
+✅ ArrayList
+✅ POO
+✅ Encapsulamiento
+✅ Métodos
+✅ Clases separadas
+✅ CRUD de productos
+✅ Reutilización de métodos
+
+Te está quedando muy sólido.
+
+---
+
+# SIGUIENTE ETAPA → Menú interactivo
+
+Ahora vamos a transformar el programa en un sistema REAL de consola.
+
+Hasta ahora:
+
+```txt id="8m6x0d"
+todo estaba hardcodeado
+```
+
+Ahora:
+
+```txt id="ytbjlwm"
+el usuario elegirá opciones
+```
+
+---
+
+# ETAPA 17 — Scanner
+
+## Paso 47 — Importar Scanner
+
+En `Main`, agregá:
+
+```java id="rfw0sj"
+import java.util.Scanner;
+```
+
+QUEDÓ:
+...
+import service.ProductoService;
+import java.util.Scanner;
+
+---
+
+# Paso 48 — Crear Scanner
+
+Dentro del `main`, al principio:
+
+```java id="10k0j8"
+Scanner scanner = new Scanner(System.in);
+```
+
+👉 Esto permite leer datos del teclado.
+
+QUEDÓ:
+	...
+        ProductoService servicio = new ProductoService();
+        Scanner scanner = new Scanner(System.in);
+
+---
+
+# ETAPA 18 — Variable opción
+
+## Paso 49 — Crear variable
+
+Necesitás una variable para guardar la opción del menú.
+
+Debe ser:
+
+```txt id="1owjlwm"
+int opcion;
+```
+QUEDÓ:
+        Scanner scanner = new Scanner(System.in);
+        
+        int opcion;
+
+---
+
+# ETAPA 19 — Crear bucle del menú
+
+## Paso 50 — Crear while
+
+Necesitamos que el menú se repita hasta salir.
+
+La idea conceptual es:
+
+```java id="k9ll9z"
+while (opcion != 7)
+```
+
+⚠️ Pero cuidado:
+antes necesitás darle un valor inicial a `opcion`.
+
+Pista:
+
+```java id="k09l3r"
+int opcion = 0;
+```
+
+---
+
+# Paso 51 — Mostrar menú
+
+Dentro del `while`, imprimí algo así:
+
+```txt id="8qlhcr"
+1) Agregar producto
+2) Listar productos
+3) Buscar producto
+4) Actualizar stock
+5) Eliminar producto
+6) Salir
+```
+
+Usá varios `System.out.println()`.
+
+QUEDÓ:
+        int opcion = 0;
+
+        while (opcion !=7) {
+            System.out.println("=== Menú ===");
+            System.out.println("1. Agregar producto");
+            System.out.println("2. Listar productos");
+            System.out.println("3. Buscar producto");
+            System.out.println("4. Actualizar stock");
+            System.out.println("5. Eliminar producto");
+            System.out.println("6. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
+        }
+
+---
+
+# Paso 52 — Leer opción
+
+Debajo del menú:
+
+```java id="jlwm2o"
+opcion = scanner.nextInt();
+```
+
+QUEDÓ:
+	    ...
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
+---
+
+# ETAPA 20 — switch
+
+## Paso 53 — Crear switch(opcion)
+
+Después de leer la opción:
+
+```java id="d7a6r0"
+switch (opcion)
+```
+QUEDÓ:
+	    ...
+            opcion = scanner.nextInt();
+            switch (opcion) {
+---
+
+# Paso 54 — Empezar con casos simples
+
+Por ahora implementá SOLO:
+
+| Opción | Acción           |
+| ------ | ---------------- |
+| 1      | agregar producto |
+| 2      | listar productos |
+| 6      | salir            |
+
+NO hagas todavía:
+
+* buscar
+* actualizar
+* eliminar
+
+Vamos gradual 😊
+
+QUEDÓ:
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 6:
+
+                    break;
+---
+
+# ETAPA 21 — Agregar productos desde teclado
+
+## Paso 55 — Dentro del case 1
+
+Ahora el usuario debe ingresar:
+
+* id
+* nombre
+* precio
+* stock
+
+Entonces:
+
+* mostrar mensajes
+* usar `scanner.nextInt()`
+* `scanner.nextDouble()`
+* `scanner.next()`
+
+⚠️ IMPORTANTE:
+todavía usá `next()` para nombre.
+Después vemos `nextLine()`.
+
+QUEDÓ:
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese el nombre del producto: ");
+                    String nombre = scanner.next();
+                    System.out.print("Ingrese el precio del producto: ");
+                    double precio = scanner.nextDouble();
+                    System.out.print("Ingrese el stock del producto: ");
+                    int stock = scanner.nextInt();
+                    Producto producto = new Producto(0, nombre, precio, stock);
+                    servicio.agregarProducto(producto);
+                    System.out.println("Producto agregado correctamente");
+                    break;
+---
+
+# Paso 56 — Crear producto con datos ingresados
+
+Dentro del case:
+
+* crear nuevo `Producto`
+* agregarlo con `servicio.agregarProducto(...)`
+
+QUEDÓ:
+		    ...
+                    int stock = scanner.nextInt();
+                    Producto producto = new Producto(0, nombre, precio, stock);
+                    servicio.agregarProducto(producto);
+                    System.out.println("Producto agregado correctamente");
+                    break;
+---
+
+# Paso 57 — Case 2
+
+Simplemente:
+
+```java id="t5p7i0"
+servicio.listarProductos();
+```
+
+QUEDÓ:
+                    break;
+                case 2:
+                    servicio.listarProductos(); // Lógica para listar productos
+                    break;
+                case 3:
+
+---
+
+# Paso 58 — Case 6
+
+Mostrar:
+
+```txt id="t0c6wo"
+Saliendo del sistema...
+```
+
+QUEDÓ:
+                    break;
+                case 6:
+                    System.out.println("Saliendo del sistema..."); // Lógica para salir
+                    break;
+                default:
+
+---
+
+# Paso 59 — Default
+
+Agregar:
+
+```txt id="y6wplm"
+Opción inválida
+```
+
+QUEDÓ:
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
+                    break;
+
+---
+
+# IMPORTANTE
+
+Todavía NO uses:
+
+* try/catch
+* pedidos
+* excepciones personalizadas
+
+Primero necesitamos que:
+✅ el menú funcione
+✅ el usuario pueda interactuar
+✅ se agreguen productos dinámicamente
+
+---
+
+# Tu objetivo ahora
+
+Lograr que el usuario pueda:
+
+```txt id="zjlwmu"
+abrir el programa
+→ elegir 1
+→ cargar productos
+→ elegir 2
+→ verlos listados
+→ elegir 6
+→ salir
+```
+
+Cuando lo tengas funcionando, pegame el nuevo `Main` 😄
+
+Te paso Main:
+package app;
+
+import model.Producto;
+import service.ProductoService;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        ProductoService servicio = new ProductoService();
+        Scanner scanner = new Scanner(System.in);
+        
+        int opcion = 0;
+
+        while (opcion !=6) {
+            System.out.println("=== Menú ===");
+            System.out.println("1. Agregar producto");
+            System.out.println("2. Listar productos");
+            System.out.println("3. Buscar producto");
+            System.out.println("4. Actualizar stock");
+            System.out.println("5. Eliminar producto");
+            System.out.println("6. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese el nombre del producto: ");
+                    String nombre = scanner.next();
+                    System.out.print("Ingrese el precio del producto: ");
+                    double precio = scanner.nextDouble();
+                    System.out.print("Ingrese el stock del producto: ");
+                    int stock = scanner.nextInt();
+                    Producto producto = new Producto(0, nombre, precio, stock);
+                    servicio.agregarProducto(producto);
+                    System.out.println("Producto agregado correctamente");
+                    break;
+                case 2:
+                    servicio.listarProductos(); // Lógica para listar productos
+                    break;
+                case 6:
+                    System.out.println("Saliendo del sistema..."); // Lógica para salir
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
+                    break;
+            }
+        }
+
+        Producto producto1 = new Producto(1, "Laptop", 1500.0, 10);
+        Producto producto2 = new Producto(2, "Mouse", 25.0, 50);
+
+        servicio.agregarProducto(producto1);
+        servicio.agregarProducto(producto2);
+        servicio.listarProductos();
+
+        Producto productoEncontrado = servicio.buscarProductoPorId(1);
+        if (productoEncontrado != null) {
+            System.out.println("Producto encontrado: " + productoEncontrado);
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+
+        servicio.actualizarStock(1, 8); // Actualiza el stock del producto con id 1 a 8
+        servicio.actualizarStock(2, -5); // Intenta actualizar el stock del producto con id 2 a un valor negativo
+        servicio.actualizarStock(3, 5); // Intenta actualizar el stock de un producto que no existe (id 3)
+        servicio.listarProductos();
+        
+        servicio.eliminarProducto(2); // Elimina el producto con id 2
+        servicio.listarProductos();
+        servicio.eliminarProducto(99); // Intenta eliminar un producto que no existe (id 99)
+        servicio.listarProductos();
+    }
+}
+
+
+¡Muy bien! 🔥
+Ya tenés un menú funcional y eso es un salto enorme.
+
+Ahora vamos a corregir y mejorar algunas cosas importantes para que el TP quede más profesional.
+
+---
+
+# Problema 1 — Código viejo debajo del while
+
+Todo esto:
+
+```java id="r7kl2x"
+Producto producto1 = ...
+Producto producto2 = ...
+...
+servicio.eliminarProducto(...)
+```
+
+⚠️ ya no debería estar.
+
+¿Por qué?
+
+Porque ahora el sistema funciona interactivo con menú.
+
+Entonces:
+
+* el usuario agrega productos desde teclado,
+* los lista desde el menú,
+* y las acciones se hacen con opciones.
+
+👉 Ese bloque de pruebas ya cumplió su función.
+Podés eliminarlo completo.
+
+QUEDÓ:
+                    System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
+                    break;
+            }
+        }
+        scanner.close();
+    }
+}
+
+---
+
+# Problema 2 — Todos los productos tienen ID = 0
+
+Acá:
+
+```java id="h4n3jk"
+Producto producto = new Producto(0, nombre, precio, stock);
+```
+
+todos quedan con ID 0.
+
+Eso después rompe:
+
+* búsquedas,
+* actualizaciones,
+* eliminaciones.
+
+---
+
+# Cómo solucionarlo
+
+## Paso 1
+
+Antes del `while`, creá:
+
+```java id="x5kp2a"
+int idActual = 1;
+```
+
+QUEDÓ:
+        int opcion = 0;
+        int idActual = 1;
+
+---
+
+## Paso 2
+
+Ahora, cuando creás el producto:
+
+en vez de:
+
+```java id="mw8j7c"
+new Producto(0, ...)
+```
+
+usá:
+
+```java id="j3c0wp"
+new Producto(idActual, ...)
+```
+
+QUEDÓ:
+                    int stock = scanner.nextInt();
+                    Producto producto = new Producto(idActual, nombre, precio, stock);
+                    servicio.agregarProducto(producto);
+---
+
+## Paso 3
+
+Después de agregar el producto:
+
+incrementá el ID:
+
+```java id="a9tq1m"
+idActual++;
+```
+
+QUEDÓ:
+                    System.out.println("Producto agregado correctamente");
+                    idActual++; // Incrementar el ID para el próximo producto
+                    break;
+
+---
+
+# ¿Qué hace eso?
+
+Cada vez que agregás:
+
+* primero usa el ID actual,
+* luego aumenta en 1.
+
+Quedaría:
+
+| Producto | ID |
+| -------- | -- |
+| Laptop   | 1  |
+| Mouse    | 2  |
+| Teclado  | 3  |
+
+---
+
+# SIGUIENTE MEJORA → Implementar opciones 3, 4 y 5
+
+Ya tenés los métodos hechos 😎
+
+Solo falta conectarlos al menú.
+
+---
+
+# ETAPA 22 — Buscar producto desde teclado
+
+## Dentro del `switch`
+
+Creá:
+
+```java id="v5u2k0"
+case 3:
+```
+
+---
+
+## Ahí necesitás:
+
+1️⃣ pedir ID
+2️⃣ llamar `buscarProductoPorId()`
+3️⃣ validar si existe
+4️⃣ mostrar resultado
+
+⚠️ EXACTAMENTE igual a como ya lo habías probado antes manualmente.
+
+Solo que ahora el ID lo escribe el usuario.
+
+QUEDÓ:
+                    break;
+                case 3:
+                    System.out.print("Ingrese el ID del producto a buscar: ");
+                    int idBusqueda = scanner.nextInt();
+                    Producto productoEncontrado = servicio.buscarProductoPorId(idBusqueda);
+                    if (productoEncontrado != null) {
+                        System.out.println("Producto encontrado: " + productoEncontrado);
+                    } else {
+                        System.out.println("Producto no encontrado");
+                    }
+                    break;
+                case 4:
+---
+
+# ETAPA 23 — Actualizar stock desde teclado
+
+## Crear:
+
+```java id="0qk8m2"
+case 4:
+```
+
+---
+
+## Ahí:
+
+1️⃣ pedir ID
+2️⃣ pedir nuevo stock
+3️⃣ llamar:
+
+```java id="xt5m0w"
+servicio.actualizarStock(...)
+```
+QUEDÓ:
+                    break;
+                case 4:
+                    System.out.print("Ingrese el ID del producto a actualizar: ");
+                    int idActualizacion = scanner.nextInt();
+                    System.out.print("Ingrese el nuevo stock: ");
+                    int nuevoStock = scanner.nextInt();
+                    servicio.actualizarStock(idActualizacion, nuevoStock);
+                    System.out.println("Stock actualizado correctamente");
+                    break;
+                case 5:
+---
+
+# ETAPA 24 — Eliminar producto desde teclado
+
+## Crear:
+
+```java id="x2n5vl"
+case 5:
+```
+
+---
+
+## Ahí:
+
+1️⃣ pedir ID
+2️⃣ llamar:
+
+```java id="d4y7po"
+servicio.eliminarProducto(...)
+```
+                    break;
+                case 5:
+                    System.out.print("Ingrese el ID del producto a eliminar: ");
+                    int idEliminacion = scanner.nextInt();
+                    servicio.eliminarProducto(idEliminacion);
+                    System.out.println("Producto eliminado correctamente");
+                    break;
+                case 6:
+---
+
+# IMPORTANTE
+
+Tu sistema ya está MUY cerca de cumplir toda la parte CRUD del TP.
+
+Te faltan principalmente:
+
+* try/catch
+* pedidos
+* excepción personalizada
+
+Pero la base ya está excelente.
+
+---
+
+# Mini mejora opcional
+
+Cuando listes productos, podrías mostrar:
+
+```txt id="e1f8k2"
+=== LISTA DE PRODUCTOS ===
+```
+
+queda más prolijo 😄
+
+---
+
+# Tu objetivo ahora
+
+Dejar funcionando:
+
+| Opción | Acción           |
+| ------ | ---------------- |
+| 1      | agregar          |
+| 2      | listar           |
+| 3      | buscar           |
+| 4      | actualizar stock |
+| 5      | eliminar         |
+| 6      | salir            |
+
+Cuando lo tengas:
+pegame el nuevo `Main`
+y seguimos con:
+
+🔥 try/catch
+🔥 NumberFormatException
+🔥 validaciones reales
+🔥 clase Pedido
+🔥 LineaPedido
+🔥 stock insuficiente.
+
+Te paso el nuevo Main:
+package app;
+
+import model.Producto;
+import service.ProductoService;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        ProductoService servicio = new ProductoService();
+        Scanner scanner = new Scanner(System.in);
+        
+        int opcion = 0;
+        int idActual = 1;
+
+        while (opcion !=6) {
+            System.out.println("=== Menú ===");
+            System.out.println("1. Agregar producto");
+            System.out.println("2. Listar productos");
+            System.out.println("3. Buscar producto");
+            System.out.println("4. Actualizar stock");
+            System.out.println("5. Eliminar producto");
+            System.out.println("6. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese el nombre del producto: ");
+                    String nombre = scanner.next();
+                    System.out.print("Ingrese el precio del producto: ");
+                    double precio = scanner.nextDouble();
+                    System.out.print("Ingrese el stock del producto: ");
+                    int stock = scanner.nextInt();
+                    Producto producto = new Producto(idActual, nombre, precio, stock);
+                    servicio.agregarProducto(producto);
+                    System.out.println("Producto agregado correctamente");
+                    idActual++; // Incrementar el ID para el próximo producto
+                    break;
+                case 2:
+                    servicio.listarProductos(); // Lógica para listar productos
+                    break;
+                case 3:
+                    System.out.print("Ingrese el ID del producto a buscar: ");
+                    int idBusqueda = scanner.nextInt();
+                    Producto productoEncontrado = servicio.buscarProductoPorId(idBusqueda);
+                    if (productoEncontrado != null) {
+                        System.out.println("Producto encontrado: " + productoEncontrado);
+                    } else {
+                        System.out.println("Producto no encontrado");
+                    }
+                    break;
+                case 4:
+                    System.out.print("Ingrese el ID del producto a actualizar: ");
+                    int idActualizacion = scanner.nextInt();
+                    System.out.print("Ingrese el nuevo stock: ");
+                    int nuevoStock = scanner.nextInt();
+                    servicio.actualizarStock(idActualizacion, nuevoStock);
+                    System.out.println("Stock actualizado correctamente");
+                    break;
+                case 5:
+                    System.out.print("Ingrese el ID del producto a eliminar: ");
+                    int idEliminacion = scanner.nextInt();
+                    servicio.eliminarProducto(idEliminacion);
+                    System.out.println("Producto eliminado correctamente");
+                    break;
+                case 6:
+                    System.out.println("Saliendo del sistema..."); // Lógica para salir
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, seleccione una opción válida.");
+                    break;
+            }
+        }
+        scanner.close();
+    }
+}
+
+
+¡Muy buen avance! 🚀
+Tu sistema ya funciona como una aplicación CRUD real de consola.
+
+De verdad, la estructura está bastante bien:
+
+* menú,
+* switch,
+* servicios,
+* lista dinámica,
+* búsquedas,
+* actualización,
+* eliminación.
+
+Ya pasaste la parte más difícil de organización 😄
+
+---
+
+# Hay 2 mejoras importantes
+
+## Mejora 1 — Mensajes duplicados
+
+En `ProductoService` ya mostrás mensajes como:
+
+```txt id="yq2n7t"
+Producto eliminado
+Stock actualizado
+```
+
+Pero en `Main` volvés a mostrar:
+
+```java id="5u1a0o"
+System.out.println("Producto eliminado correctamente");
+```
+
+Entonces pueden aparecer mensajes contradictorios.
+
+Por ejemplo:
+
+```txt id="2o7x0p"
+Producto no encontrado
+Producto eliminado correctamente
+```
+
+😅
+
+---
+
+# Qué hacer
+
+Eliminá estos mensajes del `Main`:
+
+## En case 4:
+
+```java id="jlwm1p"
+System.out.println("Stock actualizado correctamente");
+```
+
+## En case 5:
+
+```java id="jlwm2p"
+System.out.println("Producto eliminado correctamente");
+```
+
+👉 Dejá que el `Service` maneje los mensajes.
+
+Eso es más limpio arquitectónicamente.
+
+QUEDÓ:
+                    break;
+                case 4:
+                    System.out.print("Ingrese el ID del producto a actualizar: ");
+                    int idActualizacion = scanner.nextInt();
+                    System.out.print("Ingrese el nuevo stock: ");
+                    int nuevoStock = scanner.nextInt();
+                    servicio.actualizarStock(idActualizacion, nuevoStock);
+                    break;
+                case 5:
+                    System.out.print("Ingrese el ID del producto a eliminar: ");
+                    int idEliminacion = scanner.nextInt();
+                    servicio.eliminarProducto(idEliminacion);
+                    break;
+                case 6:
+---
+
+# Mejora 2 — scanner.next()
+
+Ahora mismo usás:
+
+```java id="jlwm3p"
+scanner.next()
+```
+
+Eso tiene un problema:
+solo lee UNA palabra.
+
+Ejemplo:
+
+```txt id="jlwm4p"
+Mouse Gamer
+```
+
+guardaría solamente:
+
+```txt id="jlwm5p"
+Mouse
+```
+
+---
+
+# Cómo mejorarlo
+
+Más adelante vamos a usar:
+
+```java id="jlwm6p"
+scanner.nextLine()
+```
+
+Pero todavía no lo cambies porque primero hay que aprender a manejar el salto de línea (`\n`) que deja `nextInt()`.
+
+Y eso justamente nos lleva a la siguiente etapa 👇
+
+---
+
+# SIGUIENTE ETAPA → try/catch
+
+Ahora vamos a cumplir otra parte obligatoria del TP:
+
+```txt id="q0z8y4"
+manejo de excepciones
+```
+
+---
+
+# ¿Qué problema vamos a resolver?
+
+Si el usuario pone:
+
+```txt id="h5w2vk"
+hola
+```
+
+cuando el programa espera un número...
+
+💥 el programa explota.
+
+---
+
+# ETAPA 25 — try/catch
+
+## Paso 60 — Envolver lectura de opción
+
+Actualmente tenés:
+
+```java id="f4x1zo"
+opcion = scanner.nextInt();
+```
+
+Ahora vamos a proteger eso.
+
+---
+
+# Cómo funciona try/catch
+
+Conceptualmente:
+
+```java id="r7t0qp"
+try {
+    código peligroso
+} catch (...) {
+    manejar error
+}
+```
+
+---
+
+# Paso 61 — Encerrar nextInt()
+
+Hacé:
+
+```java id="q8n4xm"
+try {
+
+    opcion = scanner.nextInt();
+
+} catch (...) {
+
+}
+```
+QUEDÓ:
+           System.out.print("Seleccione una opción: ");
+
+            try {
+                opcion = scanner.nextInt();
+            } catch (Exception e) {
+
+            }
+
+            switch (opcion) {
+---
+
+# Paso 62 — Qué excepción usar
+
+La consigna menciona:
+
+```txt id="9m3v7c"
+NumberFormatException
+```
+
+Pero con `Scanner.nextInt()` normalmente aparece:
+
+```txt id="0k8r2n"
+InputMismatchException
+```
+
+---
+
+# Paso 63 — Importar excepción
+
+Arriba del archivo:
+
+```java id="3t5y8p"
+import java.util.InputMismatchException;
+```
+
+QUEDÓ:
+
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
+public class Main {
+
+---
+
+# Paso 64 — Completar catch
+
+Dentro del catch:
+
+```java id="2j0m8r"
+System.out.println("Debe ingresar un número válido");
+scanner.nextLine();
+```
+
+⚠️ IMPORTANTÍSIMO:
+ese `scanner.nextLine()` limpia el buffer.
+Si no lo hacés, el programa entra en loop infinito.
+
+---
+
+# Resultado esperado
+
+Si el usuario pone:
+
+```txt id="z7q1mt"
+abc
+```
+
+el programa:
+✅ NO explota
+✅ muestra error
+✅ vuelve al menú
+
+Eso suma MUCHOS puntos en el TP.
+
+---
+
+# IMPORTANTE
+
+Por ahora aplicalo SOLO en:
+
+```java id="jlwm7p"
+opcion = scanner.nextInt();
+```
+
+Después iremos expandiendo validaciones.
+
+---
+
+# Tu desafío ahora
+
+Implementar:
+✅ try/catch
+✅ InputMismatchException
+✅ limpieza con nextLine()
+
+Y probar:
+
+```txt id="jlwm8p"
+escribir letras en el menú
+```
+
+Cuando lo tengas funcionando, seguimos con:
+
+🔥 nextLine() correctamente
+🔥 nombres con espacios
+🔥 clase Pedido
+🔥 LineaPedido
+🔥 StockInsuficienteException 😎
