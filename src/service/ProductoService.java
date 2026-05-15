@@ -1,10 +1,9 @@
 package service;
 
 import model.Producto;
-
 import java.util.ArrayList;
 
-public class ProductoService {
+public class ProductoService { //Creo la clase ProductoService con un ArrayList para almacenar los productos y métodos para agregar, listar, buscar por ID, actualizar stock y eliminar productos
     private ArrayList<Producto> productos = new ArrayList<>();
 
     public void agregarProducto(Producto producto) {
