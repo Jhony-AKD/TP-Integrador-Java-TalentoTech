@@ -1,4 +1,4 @@
-# Sistema de Gestión - TechLab
+# Sistema de Gestión - Talento Tech
 
 Proyecto realizado en Java como trabajo práctico integrador.
 
